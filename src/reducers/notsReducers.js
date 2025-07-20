@@ -18,6 +18,6 @@ export const notsReducer = (state, { type, payload }) => {
                 notes:[...state.notes,{text:state.text,title:state.title,id:uuid()}]
             }
         default:
-            return state;
+            // return state;
     }
 }
