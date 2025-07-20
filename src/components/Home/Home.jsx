@@ -41,19 +41,19 @@ const Home = () => {
         <input
           value={title}
 					onChange={onTitleChange}
-					className='w-[40%] py-2 px-3 border border-slate-500/50 rounded outline-none text-xl'
+					className='w-[70%] py-2 px-3 border border-blue-500/70 rounded outline-none text-xl'
 					type='text'
 					placeholder='Title'
 				/>
         <textarea
           value={text}
 					onChange={onTextChange}
-					className='w-[40%] h-[40%] p-3 border-slate-500/50 rounded outline-none resize-none'
+					className='w-[70%] h-[30%] p-3 border border-blue-500/70 rounded outline-none resize-none'
 					name=''
 					id=''
 					placeholder='Start typing'
 				></textarea>
-				<div>
+				<div className="bg-blue-500/70 mt-3 relative right py-1 px-5 rounded">
 					<button onClick={onAddClick} className="flex items-start">Add</button>
 				</div>
 			</div>

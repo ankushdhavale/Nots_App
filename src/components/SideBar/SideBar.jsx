@@ -6,13 +6,13 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 const SideBar = () => {
   const getStyles = ({ isActive }) => {
-    const style = 'flex items-center gap-3 px-2 py-1 rounded rounded-tr rounded-br border border-gray-500/50'
+    const style = ' flex items-center gap-3 px-2 py-1 rounded rounded-tr rounded-br border border-gray-500/50'
 		return isActive
 			? `bg-blue-600/50 ${style}`
 			: `hover:bg-blue-600/50 text-slate-300/50 bg-grey-800 ${style} transition-colors duration-400 `;
 	};
 	return (
-		<aside className='flex flex-col text-xl gap-3 w-[16%] p-3 h-screen border-r border-gray-700'>
+		<aside className=' xs:hidden flex flex-col text-xl gap-3 w-[16%] p-3 h-screen border-r border-gray-700'>
 			<NavLink to='/' className={getStyles}>
 				<IoHome />
 				<span>Home</span>
