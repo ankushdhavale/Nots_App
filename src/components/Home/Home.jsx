@@ -38,7 +38,7 @@ const Home = () => {
 	return (
 		<div className='flex gap-3 justify-center items-center'>
 			<SideBar />
-			<div className='flex flex-col items-center w-[90%] gap-1 mt-20'>
+			<div className='flex flex-col items-center w-[90%] gap-1 mt-20 rounded'>
 				<input
 					value={title}
 					onChange={onTitleChange}
@@ -59,7 +59,7 @@ const Home = () => {
 						Add
 					</button>
 				</div>
-				<div className="flex mt-5 flex-wrap w-[70%] items-center justify-center">
+				<div className="flex mt-5 flex-wrap w-[80%] items-center justify-center">
 					{
 						notes?.length > 0 && notes.map((note) => {
 							return <NotsCard note={note} key={note.id}/> 
