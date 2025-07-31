@@ -2,26 +2,26 @@ import React, { useReducer, useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import { notsReducer } from "../../reducers/notsReducers";
 import NotsCard from "../NotsCard/NotsCard";
+import { useNots } from "../../context/notsContext";
 
 const Home = () => {
-	const initialState = {
-		text: "",
-		title: "",
-		notes: [],
-	};
+	// const initialState = {
+	// 	text: "",
+	// 	title: "",
+	// 	notes: [],
+	// };
 
-	const [{ text, title, notes }, notsDispatch] = useReducer(
-		notsReducer,
-		initialState
-	);
+	// const [{ text, title, notes }, notsDispatch] = useReducer(
+	// 	notsReducer,
+	// 	initialState
+	// );
+	const { notes, text, title ,notsDispatch} = useNots();
 	const onTitleChange = (e) => {
 		notsDispatch({
 			type: "TITLE",
 			payload: e.target.value,
 		});
 	};
-
-	console.log(notes);
 
 	const onTextChange = (e) => {
 		notsDispatch({
@@ -35,6 +35,7 @@ const Home = () => {
 			type: "ADD_NOTE",
 		});
 	};
+	
 	return (
 		<div className='flex gap-3 justify-center items-center'>
 			<SideBar />

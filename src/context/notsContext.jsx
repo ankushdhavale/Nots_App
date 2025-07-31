@@ -1,11 +1,26 @@
-import { createContext } from "react";
+import { createContext, useContext, useReducer } from "react";
+import { notsReducer } from "../reducers/notsReducers";
 
-export const notsContext = createContext();
+export const NotsContext = createContext();
 
-export const notsContextProvider = ({children}) => {
+const NotsContextProvider = ({ children }) => {
+    const initialState = {
+            text: "",
+            title: "",
+            notes: [],
+        };
+    
+        const [{ text, title, notes }, notsDispatch] = useReducer(
+            notsReducer,
+            initialState
+        );
     return (
-        <notsContext.Provider value={{}}>
+        <NotsContext.Provider value={{ text, title, notes,notsDispatch}}>
             {children}
-        </notsContext.Provider>
+        </NotsContext.Provider>
     )
 }
+
+
+const useNots = () => useContext(NotsContext);
+export { useNots, NotsContextProvider };
