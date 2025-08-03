@@ -3,39 +3,40 @@ import SideBar from "../SideBar/SideBar";
 import { notsReducer } from "../../reducers/notsReducers";
 import NotsCard from "../NotsCard/NotsCard";
 import { useNots } from "../../context/notsContext";
+import { toast } from "react-toastify";
 
 const Home = () => {
-	// const initialState = {
-	// 	text: "",
-	// 	title: "",
-	// 	notes: [],
-	// };
-
-	// const [{ text, title, notes }, notsDispatch] = useReducer(
-	// 	notsReducer,
-	// 	initialState
-	// );
-	const { notes, text, title ,notsDispatch} = useNots();
+	const { notes, text, title, notesDispatch } = useNots();
+	const { isPinned } = notes;
 	const onTitleChange = (e) => {
-		notsDispatch({
+		notesDispatch({
 			type: "TITLE",
 			payload: e.target.value,
 		});
 	};
 
 	const onTextChange = (e) => {
-		notsDispatch({
+		notesDispatch({
 			type: "TEXT",
 			payload: e.target.value,
 		});
 	};
 
 	const onAddClick = () => {
-		notsDispatch({
+		if (text === '' && title === '') {
+			toast('Please fill input fields',80)
+			return;
+		}
+		notesDispatch({
 			type: "ADD_NOTE",
 		});
 	};
-	
+
+	const pinnedNotes = notes.filter((note) => note.isPinned === true);
+	const otherNotes = notes.filter((note) => note.isPinned === false);
+	console.log(pinnedNotes);
+	console.log(otherNotes);
+
 	return (
 		<div className='flex gap-3 justify-center items-center'>
 			<SideBar />
@@ -51,8 +52,6 @@ const Home = () => {
 					value={text}
 					onChange={onTextChange}
 					className='w-[70%] h-[25vh] p-3 border border-blue-700/50 rounded outline-none resize-none'
-					name=''
-					id=''
 					placeholder='Start typing'
 				></textarea>
 				<div className='bg-blue-500/70 border-blue-700/50 mt-2 relative left-[357px] border border-grey-400/70 py-1 px-6 text-md rounded'>
@@ -60,12 +59,23 @@ const Home = () => {
 						Add
 					</button>
 				</div>
-				<div className="flex mt-5 flex-wrap w-[80%] items-center justify-center">
-					{
-						notes?.length > 0 && notes.map((note) => {
-							return <NotsCard note={note} key={note.id}/> 
-					})	
-					}
+				<div className='flex flex-col mt-5 flex-wrap w-[80%] items-center justify-center'>
+					{otherNotes?.length > 0 && <p>Other</p>}
+					<div className='flex mt-5 flex-wrap w-[80%] items-center justify-center'>
+						{otherNotes?.length > 0 &&
+							otherNotes.map((note) => {
+								return <NotsCard note={note} key={note.id} />;
+							})}
+					</div>
+				</div>
+				<div className='flex flex-col mt-5 flex-wrap w-[80%] items-center justify-center'>
+					{pinnedNotes.length > 0 && <p>Pinned</p>}
+					<div className="flex mt-5 flex-wrap w-[80%] items-center justify-center">
+						{pinnedNotes?.length > 0 &&
+						pinnedNotes.map((note) => {
+							return <NotsCard note={note} key={note.id} />;
+						})}
+					</div>
 				</div>
 			</div>
 		</div>

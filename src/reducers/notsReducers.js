@@ -1,23 +1,56 @@
 import { v4 as uuid } from "uuid";
 
 export const notsReducer = (state, { type, payload }) => {
-    switch (type) {
-        case 'TITLE': 
+	switch (type) {
+		case "TITLE":
+			return {
+				...state,
+				title: payload,
+			};
+		case "TEXT":
+			return {
+				...state,
+				text: payload,
+			};
+		case "ADD_NOTE":
+			return {
+				...state,
+				notes: [
+					...state.notes,
+					{ text: state.text, title: state.title, id: uuid(), isPinned: false },
+				],
+			};
+		case "PIN":
+			return {
+				...state,
+				notes: state.notes.map(note =>
+					note.id === payload.id ? { ...note, isPinned: true } : note
+				),
+            };
+        case "UNPIN":
             return {
                 ...state,
-                title:payload
+                notes: state.notes.map(note =>
+					note.id === payload.id ? { ...note, isPinned: false } : note
+				),
             }
-        case 'TEXT':
-            return {
-                ...state,
-                text:payload,
-            }
-        case 'ADD_NOTE':
-            return {
-                ...state,
-                notes:[...state.notes,{text:state.text,title:state.title,id:uuid()}]
-            }
-        default:
-            return state;
-    }
-}
+		case "ARCHIVE":
+			return {
+				...state,
+				notes: [
+					...state.notes,
+					{ text: state.text, title: state.title, id: uuid() },
+				],
+			};
+		case "TRASH":
+			return {
+				...state,
+				notes: [
+					...state.notes,
+					{ text: state.text, title: state.title, id: uuid() },
+				],
+			};
+		default:
+			return state;
+	}
+};
