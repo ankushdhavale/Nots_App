@@ -9,14 +9,15 @@ const NotsContextProvider = ({ children }) => {
             text: "",
             title: "",
             notes: [],
+            archive:[],
         };
     
-        const [{ text, title, notes }, notesDispatch] = useReducer(
+        const [{ text, title, notes ,archive}, notesDispatch] = useReducer(
             notsReducer,
             initialState
         );
     return (
-        <NotsContext.Provider value={{ text, title, notes,notesDispatch}}>
+        <NotsContext.Provider value={{ text, title, notes,archive,  notesDispatch}}>
             {children}
         </NotsContext.Provider>
     )

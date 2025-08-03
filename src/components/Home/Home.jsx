@@ -30,6 +30,7 @@ const Home = () => {
 		notesDispatch({
 			type: "ADD_NOTE",
 		});
+		
 	};
 
 	const pinnedNotes = notes.filter((note) => note.isPinned === true);

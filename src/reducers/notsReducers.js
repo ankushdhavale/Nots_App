@@ -19,7 +19,13 @@ export const notsReducer = (state, { type, payload }) => {
 					...state.notes,
 					{ text: state.text, title: state.title, id: uuid(), isPinned: false },
 				],
-			};
+            };
+        case "CLARE":
+            return {
+                ...state,
+                text: '',
+                title:' '
+            }
 		case "PIN":
 			return {
 				...state,
@@ -37,10 +43,7 @@ export const notsReducer = (state, { type, payload }) => {
 		case "ARCHIVE":
 			return {
 				...state,
-				notes: [
-					...state.notes,
-					{ text: state.text, title: state.title, id: uuid() },
-				],
+				archive:[...state.archive,state.notes.find((id)===payload.id)] 
 			};
 		case "TRASH":
 			return {
