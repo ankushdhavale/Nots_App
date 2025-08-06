@@ -12,4 +12,4 @@ const Archive = () => {
   )
 }
 
-export default Archive
+export default Archive;
