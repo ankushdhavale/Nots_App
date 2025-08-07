@@ -17,7 +17,8 @@ const NotsContextProvider = ({ children }) => {
             initialState
     );
     
-    console.log(archive);
+    console.log("archive",archive);
+    console.log("notes",notes);
     
     return (
         <NotsContext.Provider value={{ text, title, notes,archive,  notesDispatch}}>

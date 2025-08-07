@@ -1,6 +1,10 @@
 import { v4 as uuid } from "uuid";
 
 export const notsReducer = (state, { type, payload }) => {
+	// console.log("hello", state.notes.find((i) => i.id === payload.id));
+	// console.log(payload.id);
+	
+	
 	switch (type) {
 		case "TITLE":
 			return {
@@ -45,9 +49,16 @@ export const notsReducer = (state, { type, payload }) => {
 				...state,
 				archive: [
 					...state.archive,
-					state.notes.find((id) => id === payload.id),
+					state.notes.find(({id}) => id === payload.id),
 				],
+				notes: state.notes.filter(({ id }) => id !== payload.id)
 			};
+		case "REMOVE_FROM_ARCHIVE":
+			return {
+				...state,
+				notes:[...state.notes,state.archive.find(({id})=> id ===payload.id)],
+				archive: state.archive.filter(({ id }) => id !== payload.id)
+			}
 		case "TRASH":
 			return {
 				...state,

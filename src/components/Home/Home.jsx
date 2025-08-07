@@ -35,8 +35,6 @@ const Home = () => {
 
 	const pinnedNotes = notes.filter((note) => note.isPinned === true);
 	const otherNotes = notes.filter((note) => note.isPinned === false);
-	console.log(pinnedNotes);
-	console.log(otherNotes);
 
 	return (
 		<div className='flex gap-3 justify-center items-center'>
