@@ -9,7 +9,7 @@ const NotsCard = ({ note }) => {
 	// console.log(isPinned);
 	// console.log(note);
 
-	const { notesDispatch, archive } = useNots();
+	const { notesDispatch, archive,bin } = useNots();
 
 	const clickIsPinned = (id) => {
 		!isPinned &&
@@ -33,11 +33,41 @@ const NotsCard = ({ note }) => {
 		});
 	};
 
+	const clickedUnArchive = (id) => {
+		notesDispatch({
+			type: "REMOVE_FROM_ARCHIVE",
+			payload:{id}
+		})
+	}
+
+	const clickedUnBin = (id) => {
+		notesDispatch({
+			type: "REMOVE_FROM_BIN",
+			payload:{id}
+		})
+	}
+
 	const findNotesInArchive = (archive, id) => {
-		return archive.some((note) => note.id === id);
+		return archive?.some((note) => note.id === id);
 	};
 
+	const findNotesInBin = (bin, id) => {
+		return bin?.some((binNote) => binNote.id === id);
+	}
+
+
+	console.log(findNotesInBin);
+	
+	const clickedBin = (id) => {
+		console.log(bin,"bin is here");
+		
+		notesDispatch({
+			type: "BIN",
+			payload:{id}
+		})
+	}
 	const isNotesArchive = findNotesInArchive(archive, id);
+	const isNotesBin = findNotesInBin(bin, id);
 
 	return (
 		<div className='border w-[20vw] flex flex-col  border-blue-900/90 shadow-blue-600/50 shadow-sm m-3 p-3 rounded'>
@@ -63,7 +93,7 @@ const NotsCard = ({ note }) => {
 				<div className='flex flex-col gap-1'>
 					{isNotesArchive ? (
 						<IoArchive
-							onClick={() => clickedArchive(id)}
+							onClick={() => clickedUnArchive(id)}
 							size={19}
 							className=' cursor-pointer'
 						/>
@@ -74,7 +104,12 @@ const NotsCard = ({ note }) => {
 							className=' cursor-pointer'
 						/>
 					)}
-					<MdDeleteOutline size={22} className=' cursor-pointer' />
+					{
+					isNotesBin ? (
+						<MdDeleteOutline onClick={()=>clickedUnBin(id)} size={22} className=' cursor-pointer' />		
+					): (
+						<MdDeleteOutline onClick={()=>clickedBin(id)} size={22} className=' cursor-pointer' />	
+					)}
 				</div>
 			</div>
 		</div>

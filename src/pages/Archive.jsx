@@ -13,7 +13,7 @@ const Archive = () => {
 				<div className='flex mt-5 flex-wrap w-[80%] items-center justify-center'>
 					{archive?.length > 0 &&
 						archive.map((note) => {
-							return <NotsCard note={note} key={note.id} />;
+							return <NotsCard note={note} key={note?.id} />;
 						})}
 				</div>
 			</div>

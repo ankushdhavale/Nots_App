@@ -6,13 +6,15 @@ export const NotsContext = createContext();
 const NotsContextProvider = ({ children }) => {
 
     const initialState = {
-            text: "",
-            title: "",
-            notes: [],
-            archive:[],
-        };
+        text: "",
+        title: "",
+        notes: [],
+        archive: [],
+        bin: [],
+        important: []
+    };
     
-        const [{ text, title, notes ,archive}, notesDispatch] = useReducer(
+        const [{ text, title, notes ,archive,bin,important}, notesDispatch] = useReducer(
             notsReducer,
             initialState
     );
@@ -21,7 +23,7 @@ const NotsContextProvider = ({ children }) => {
     console.log("notes",notes);
     
     return (
-        <NotsContext.Provider value={{ text, title, notes,archive,  notesDispatch}}>
+        <NotsContext.Provider value={{ text, title, notes,archive,bin,important,  notesDispatch}}>
             {children}
         </NotsContext.Provider>
     )

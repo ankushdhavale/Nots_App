@@ -24,7 +24,7 @@ export const notsReducer = (state, { type, payload }) => {
 					{ text: state.text, title: state.title, id: uuid(), isPinned: false },
 				],
 			};
-		case "CLARE":
+		case "CLEAR":
 			return {
 				...state,
 				text: "",
@@ -49,24 +49,34 @@ export const notsReducer = (state, { type, payload }) => {
 				...state,
 				archive: [
 					...state.archive,
-					state.notes.find(({id}) => id === payload.id),
+					state.notes.find(({ id }) => id === payload.id),
 				],
 				notes: state.notes.filter(({ id }) => id !== payload.id)
 			};
 		case "REMOVE_FROM_ARCHIVE":
 			return {
 				...state,
-				notes:[...state.notes,state.archive.find(({id})=> id ===payload.id)],
+				notes: [...state.notes, state.archive.find(({ id }) => id === payload.id)],
 				archive: state.archive.filter(({ id }) => id !== payload.id)
 			}
-		case "TRASH":
+		case "BIN":
 			return {
 				...state,
-				notes: [
-					...state.notes,
-					{ text: state.text, title: state.title, id: uuid() },
+				bin: [
+					...state.bin,
+					state.notes.find(({ id }) => id === payload.id)
 				],
+				notes: state.notes.filter(({ id }) => id !== payload.id)
 			};
+		case "REMOVE_FROM_BIN":
+			return {
+				notes: [...state.notes, state.bin.find(({ id }) => id === payload.id)],
+				bin: state.bin.filter(({ id })=>  id !== payload.id)
+			}
+		case "IMPORTANT":
+			return {
+				
+			}
 		default:
 			return state;
 	}
