@@ -28,7 +28,7 @@ export const notsReducer = (state, { type, payload }) => {
 			return {
 				...state,
 				text: "",
-				title: " ",
+				title: "",
 			};
 		case "PIN":
 			return {
@@ -73,10 +73,12 @@ export const notsReducer = (state, { type, payload }) => {
 				notes: [...state.notes, state.bin.find(({ id }) => id === payload.id)],
 				bin: state.bin.filter(({ id })=>  id !== payload.id)
 			}
-		case "IMPORTANT":
-			return {
-				
-			}
+		// case "IMPORTANT":
+		// 	return {
+		// 		...state,
+		// 		important: [...state.important, state.notes.find(({ id }) => id == [payload.id])],
+		// 		notes: state.notes.filter(({ id }) => id !== payload.id),
+		// 	}
 		default:
 			return state;
 	}

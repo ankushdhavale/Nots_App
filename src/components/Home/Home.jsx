@@ -24,36 +24,39 @@ const Home = () => {
 
 	const onAddClick = () => {
 		if (text === '' && title === '') {
-			toast('Please fill input fields',80)
+			toast('Please fill input fields', 80)
 			return;
 		}
 		notesDispatch({
 			type: "ADD_NOTE",
 		});
-		
+		toast('Added to nots', 80)
+		notesDispatch({
+			type: "CLEAR"
+		})
 	};
 
 	const pinnedNotes = notes.filter((note) => note.isPinned === true);
 	const otherNotes = notes.filter((note) => note.isPinned === false);
 
 	return (
-		<div className='flex gap-3 justify-center items-center'>
+		<div className=''>
 			<SideBar />
-			<div className='flex flex-col items-center w-[90%] gap-1 mt-20 rounded'>
+			<div className='flex lg:ml-40 md:ml-40 flex-col items-center w-[100%] lg:w-[90%] md:w-[90%] gap-1 mt-10 rounded'>
 				<input
 					value={title}
 					onChange={onTitleChange}
-					className='w-[70%] py-2 px-3 border border-blue-700/50 rounded outline-none text-xl'
+					className='w-[80%] lg:w-[70%] md:w-[70%] py-2 px-3 border border-blue-700/50 rounded outline-none text-xl'
 					type='text'
 					placeholder='Title'
 				/>
 				<textarea
 					value={text}
 					onChange={onTextChange}
-					className='w-[70%] h-[25vh] p-3 border border-blue-700/50 rounded outline-none resize-none'
+					className='w-[80%] lg:w-[70%] md:w-[70%] h-[25vh] p-3 border border-blue-700/50 rounded outline-none resize-none'
 					placeholder='Start typing'
 				></textarea>
-				<div className='bg-blue-500/70 border-blue-700/50 mt-2 relative left-[357px] border border-grey-400/70 py-1 px-6 text-md rounded'>
+				<div className='bg-blue-500/70 border-blue-700/50 mt-2 relative border border-grey-400/70 py-1 px-6 text-md rounded'>
 					<button onClick={onAddClick} className='flex items-start'>
 						Add
 					</button>
